@@ -1,4 +1,4 @@
-### Публикация приложения Asp.Net Core Blazor приложения + БД PostgreSQL на Amvera
+### Публикация приложения Asp.Net Core Blazor + БД PostgreSQL на Amvera
 
 **Цель проекта**: создание web-приложения и последующая его публикация на [Amvera](https://amvera.ru/)
 
