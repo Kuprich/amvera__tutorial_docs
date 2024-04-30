@@ -33,7 +33,8 @@
 [Подробнее про модели размещения ASP.NET Core Blazor](https://learn.microsoft.com/ru-ru/aspnet/core/blazor/hosting-models?view=aspnetcore-8.0)
 
 **Модель и контекст базы данных**
- Содержимое файла *WeatherForecast.cs*, расположенного в каталоге *Models* проекта *"AmveraWeather"*:
+
+Содержимое файла *WeatherForecast.cs*, расположенного в каталоге *Models* проекта *"AmveraWeather"*:
 
 ```cs
 public class WeatherForecast
@@ -85,6 +86,7 @@ public static class DbInitializer
 >***:warning:***: *подробнее по использованию механизма миграций в EF Core: [Обзор миграций](https://learn.microsoft.com/ru-ru/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)*
 
 **Подключение к Базе Данных PostgreSQL**
+
 В файле *appsettings.json* проекта *AmveraWether* добавлен параметр "ConnectionStrings": 
 
 ```json
@@ -271,7 +273,9 @@ User Id - имя пользователя
 В разделе *Настройки* основного проекта необходимо активировать доменное имя. Имя третьего уровня генерируется автоматически
 ![Доменное имя. Активация](assets/create_domain_name.png)
 
-Посетите страницу [Сетевое взаимодействие](https://docs.amvera.ru/applications/configuration/network.html#id3) если вы хотите использовать своё доменное имя
+>***:warning:***: *Посетите страницу [Сетевое взаимодействие](https://docs.amvera.ru/applications/configuration/network.html#id3) если вы хотите использовать своё доменное имя*
+
+
 
 Финальный результат:
 ![Финальный результат](assets/final_result.png)
