@@ -20,6 +20,7 @@
 ### Обзор решения
 
 Склонируйте заранее подготовленный проект командой: 
+
 ```$ git clone https://github.com/Kuprich/AmveraWeather```
 
 решение состоит из 2-х проектов и каталога SolutionItems: 
@@ -44,7 +45,7 @@ public class WeatherForecast
 }
 ```
 Содержимое файла *AppDbContext.cs*, расположенного в каталоге *Data* проекта *"AmveraWeather"*:
-```cs
+```c#
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<WeatherForecast> Forecasts { get; set; }
@@ -55,7 +56,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
 Применение миграций к базе данных и заполнение её тестовыми данными реализовано в статическом классе *DbInitializer*, расположенного в каталоге *Data* проекта *"AmveraWeather"*:
 
-```cs
+```c#
 public static class DbInitializer
 {
     public static async Task InitializeDbAsync(AppDbContext dbContext)
@@ -258,9 +259,11 @@ User Id - имя пользователя
 >***:warning:***: *Вносите изменения именно в файл appsettings.json. В проекте имеется файл appsettings.Development.json. ASP.NET Core может настраивать поведение приложения в зависимости от среды выполнения. Подробнее:[Использование нескольких сред в ASP.NET Core](https://learn.microsoft.com/ru-ru/aspnet/core/fundamentals/environments?view=aspnetcore-8.0)*
 
 Создайте коммит:
+
 ```$ git commit -a  -m "db connection is configured"```
 
 Отправьте обновленные данные в удаленный репозиторий: 
+
 ```$ git push amvera master```
 
 Сборка проекта начнется автоматически, но имеется возможность пересобрать проект.
