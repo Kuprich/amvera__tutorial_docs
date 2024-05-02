@@ -1,14 +1,15 @@
 ### Публикация приложения Asp.Net Core Blazor + БД PostgreSQL на [Amvera](https://amvera.ru/)
 
 В этой статье: 
-- [Обзор решения](#solution_description)
-    - [Модель и контекст базы данных](#model_context)
-    - [Инициализация БД и заполнение её тестовыми данными](#dbInitializer)
-    - [Подключение к PostgreSQL](#appsettings)
-    - [Создание DockerFile](#dockerfile)
+- [Обзор решения](#обзор-решения)
+    - [Модель и контекст БД](#модель-и-контекст-бд)
+    - [Инициализация БД и заполнение её тестовыми данными](#инициализация-бд-и-заполнение-её-тестовыми-данными)
+    - [Подключение к PostgreSQL](#подключение-к-postgresql)
+    - [Создание DockerFile](#создание-dockerfile)
 - [Деплой проекта на Amvera](#деплой-проекта-на-amvera)
-    - [Создание проекта "Приложение"](#create_project)
-    - [Создание проекта "PostgreSQL"](#create_db)
+    - [Создание проекта "Приложение"](#cоздание-проекта-"приложение")
+    - [Создание проекта "PostgreSQL"](#создание-проекта-"postgresql")
+    - [Подключение проекта "PostgreSQL" к Blazor приложению](#подключение-проекта-"postgresql"-к-blazor-приложению)
 
 
 ### Обзор решения {#solution_description}
@@ -42,7 +43,7 @@ Web-приложение Blazor, предоставляющее возможно
 
 
 
-**Модель и контекст базы данных** {#model_context}
+#### Модель и контекст БД**
 
 Содержимое файла *WeatherForecast.cs*, расположенного в каталоге *Models* проекта *"AmveraWeather"*:
 
@@ -63,7 +64,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 }
 ```
 
-**Инициализация Базы данных и заполнение её тестовыми данными** {#dbInitializer}
+#### Инициализация БД и заполнение её тестовыми данными
 
 Применение миграций к базе данных и заполнение её тестовыми данными реализовано в статическом классе *DbInitializer*, расположенного в каталоге *Data* проекта *"AmveraWeather"*:
 
@@ -95,7 +96,7 @@ public static class DbInitializer
 ```
 > *Подробнее по использованию механизма миграций в EF Core: [Обзор миграций](https://learn.microsoft.com/ru-ru/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)*
 
-**Подключение к Базе Данных PostgreSQL** {#appsettings}
+#### Подключение к PostgreSQL
 
 В файле *appsettings.json* проекта *AmveraWether* добавлен параметр "ConnectionStrings": 
 
@@ -110,7 +111,7 @@ public static class DbInitializer
 
 > *Данный метод определения параметра ConnectionStrings в файле appsettings.json представлен в ознакомительных целях. Данные о подключении к БД следует скрывать, например, используя ["Сейф хранилище секретов приложений в разработке в ASP.NET Core"](https://learn.microsoft.com/ru-ru/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows)*
 
-**Создание DockerFile** {#dockerfile}
+#### Создание DockerFile
 
 Visual Studio предосталяет инструменты генерации DockerFile. С помощью IDE добавлена в проект поддержка Docker, а затем внесены изменения, по итогу, содержимое DockerFile представлено ниже:
 
@@ -244,7 +245,7 @@ run:
 ![Создание проекта PostgreeSQL. Этап 2.](assets/create_postgre_2.png)
 
 
-#### Подключение БД к ранее созданному Blazor приложению
+#### Подключение проекта "PostgreSQL" к Blazor приложению
 
 Обновите локальный репозиторий командой: 
 ```$ git pull amvera master```
