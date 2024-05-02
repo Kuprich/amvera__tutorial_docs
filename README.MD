@@ -105,7 +105,6 @@ public static class DbInitializer
   "ConnectionStrings": {
     "PostgreeSql": "Server=; Database=; User Id=; Password=;"
   },
-  ...
 }
 ```
 
