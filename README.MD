@@ -6,7 +6,7 @@
     - [Инициализация БД и заполнение её тестовыми данными](#инициализация-бд-и-заполнение-её-тестовыми-данными)
     - [Подключение к PostgreSQL](#подключение-к-postgresql)
     - [Создание DockerFile](#создание-dockerfile)
-- [Деплой решения на Amvera](#деплой-проекта-на-amvera)
+- [Деплой решения на Amvera](#деплой-решения-на-amvera)
     - [Создание проекта "Приложение"](#деплой-проекта-на-amvera)
     - [Создание проекта "PostgreSQL"](#создание-проекта-типа-postgresql)
     - [Подключение проекта "PostgreSQL" к Blazor приложению](#подключение-проекта-postgresql-к-blazor-приложению)
@@ -153,7 +153,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 > *Метод UseNpgsql поставляется NuGet-пакетом "Npgsql.EntityFrameworkCore.PostgreSQL"*
 
 
-### Деплой проекта на Amvera
+### Деплой решения на Amvera
 
 Перейдите на сайт [Amvera](https://cloud.amvera.ru/). Выполните вход в ЛК. 
 Необходимо создать два проекта:
