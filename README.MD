@@ -6,7 +6,7 @@
     - [Инициализация БД и заполнение её тестовыми данными](#dbInitializer)
     - [Подключение к PostgreSQL](#appsettings)
     - [Создание DockerFile](#dockerfile)
-- [Деплой проекта на Amvera](#amvera_deploy)
+- [Деплой проекта на Amvera](#деплой-проекта-на-amvera)
     - [Создание проекта "Приложение"](#create_project)
     - [Создание проекта "PostgreSQL"](#create_db)
 
@@ -152,7 +152,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 > *Метод UseNpgsql поставляется NuGet-пакетом "Npgsql.EntityFrameworkCore.PostgreSQL"*
 
 
-### Деплой проекта на Amvera {#amvera_deploy}
+### Деплой проекта на Amvera
 
 **Создание проекта. Этап 1**
 
