@@ -269,7 +269,6 @@ run:
 "ConnectionStrings": {
   "PostgreeSql": "Server=amvera-kupri4-cnpg-weatherdb-rw; Database=weatherdb; User Id=amvera; Password=*******;"
 }
-...
 ```
 
 > *[Примеры строк подключения к БД типа postgreSQL](https://www.connectionstrings.com/postgresql/)*
