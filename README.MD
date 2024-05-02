@@ -1,9 +1,19 @@
-### Публикация приложения Asp.Net Core Blazor + БД PostgreSQL на Amvera
+### Публикация приложения Asp.Net Core Blazor + БД PostgreSQL на [Amvera](https://amvera.ru/)
 
-**Цель проекта**: создание web-приложения и последующая его публикация на [Amvera](https://amvera.ru/)
+В этой статье: 
+- [Обзор решения](#solution_description)
+    - [Модель и контекст базы данных](#model_context)
+    - [Инициализация БД и заполнение её тестовыми данными](#dbInitializer)
+    - [Подключение к PostgreSQL](#appsettings)
+    - [Создание DockerFile](#dockerfile)
+- [Деплой проекта на Amvera](#amvera_deploy)
+    - [Создание проекта "Приложение"](#create_project)
+    - [Создание проекта "PostgreSQL"](#create_db)
 
-#### Описание проекта
-**Тема**: Web-приложение Blazor, предоставляющее возможность извлекать из базы данных информацию о погоде
+
+### Обзор решения {#solution_description}
+
+Web-приложение Blazor, предоставляющее возможность извлекать из базы данных информацию о погоде
 
 **Используемые инструменты и технологии:**
 
@@ -17,22 +27,22 @@
 
 **Исходный код проекта:** [github](https://github.com/Kuprich/AmveraWeather)
 
-### Обзор решения
-
 Склонируйте заранее подготовленный проект командой: 
 
 ```$ git clone https://github.com/Kuprich/AmveraWeather```
 
-решение состоит из 2-х проектов и каталога SolutionItems: 
+Решение состоит из 2-х проектов и каталога SolutionItems: 
 
 1. AmveraWeather - проект типа Blazor WebServer
 1. AmveraWeather.Client - проект типа Blazor WebAssembly
 
 ![Структура проекта](assets/project_structure.png)
 
-[Подробнее про модели размещения ASP.NET Core Blazor](https://learn.microsoft.com/ru-ru/aspnet/core/blazor/hosting-models?view=aspnetcore-8.0)
+> *[Подробнее про модели размещения ASP.NET Core Blazor](https://learn.microsoft.com/ru-ru/aspnet/core/blazor/hosting-models?view=aspnetcore-8.0)*
 
-**Модель и контекст базы данных**
+
+
+**Модель и контекст базы данных** {#model_context}
 
 Содержимое файла *WeatherForecast.cs*, расположенного в каталоге *Models* проекта *"AmveraWeather"*:
 
@@ -53,7 +63,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 }
 ```
 
-**Инициализация Базы данных и заполнение её тестовыми данными**
+**Инициализация Базы данных и заполнение её тестовыми данными** {#dbInitializer}
 
 Применение миграций к базе данных и заполнение её тестовыми данными реализовано в статическом классе *DbInitializer*, расположенного в каталоге *Data* проекта *"AmveraWeather"*:
 
@@ -83,9 +93,9 @@ public static class DbInitializer
     }
 }
 ```
->***:warning:***: *подробнее по использованию механизма миграций в EF Core: [Обзор миграций](https://learn.microsoft.com/ru-ru/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)*
+> *Подробнее по использованию механизма миграций в EF Core: [Обзор миграций](https://learn.microsoft.com/ru-ru/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)*
 
-**Подключение к Базе Данных PostgreSQL**
+**Подключение к Базе Данных PostgreSQL** {#appsettings}
 
 В файле *appsettings.json* проекта *AmveraWether* добавлен параметр "ConnectionStrings": 
 
@@ -98,9 +108,9 @@ public static class DbInitializer
 }
 ```
 
->***:warning:***: *данный метод определения параметра ConnectionStrings в файле appsettings.json представлен в ознакомительных целях. Данные о подключении к БД следует скрывать, например, используя ["Сейф хранилище секретов приложений в разработке в ASP.NET Core"](https://learn.microsoft.com/ru-ru/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows)*
+> *Данный метод определения параметра ConnectionStrings в файле appsettings.json представлен в ознакомительных целях. Данные о подключении к БД следует скрывать, например, используя ["Сейф хранилище секретов приложений в разработке в ASP.NET Core"](https://learn.microsoft.com/ru-ru/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=windows)*
 
-**Создание DockerFile**
+**Создание DockerFile** {#dockerfile}
 
 Visual Studio предосталяет инструменты генерации DockerFile. С помощью IDE добавлена в проект поддержка Docker, а затем внесены изменения, по итогу, содержимое DockerFile представлено ниже:
 
@@ -126,7 +136,7 @@ WORKDIR /app
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "AmveraWeather.dll"]
 ```
->***:warning:***: *Посетите страницу ["Образы Docker для ASP.NET Core"](https://learn.microsoft.com/ru-ru/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-8.0) для ознакомления с примерами DockerFile.*
+> *Посетите страницу ["Образы Docker для ASP.NET Core"](https://learn.microsoft.com/ru-ru/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-8.0) для ознакомления с примерами DockerFile.*
 
 
 
@@ -137,12 +147,12 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgreeSql"))
 );
 ```
->***:warning:***: *метод AddDbContext поставляется NuGet-пакетом "Microsoft.EntityFrameworkCore"*
+> *Метод AddDbContext поставляется NuGet-пакетом "Microsoft.EntityFrameworkCore"*
 
->***:warning:***: *метод UseNpgsql поставляется NuGet-пакетом "Npgsql.EntityFrameworkCore.PostgreSQL"*
+> *Метод UseNpgsql поставляется NuGet-пакетом "Npgsql.EntityFrameworkCore.PostgreSQL"*
 
 
-#### Деплой проекта на Amvera
+### Деплой проекта на Amvera {#amvera_deploy}
 
 **Создание проекта. Этап 1**
 
@@ -150,7 +160,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 - Название проекта
 - Тариф 
 
->***:warning:***: *для данного проекта достаточно начального тарифного плана, но для решений сложнее, специалисты Amvera рекомендуют выполнить первый запуск с одним и старших тарифов*
+> *для данного проекта достаточно начального тарифного плана, но для решений сложнее, специалисты Amvera рекомендуют выполнить первый запуск с одним и старших тарифов*
 
 ![Создание проекта Этап 1](assets/create_project_1.png)
 
@@ -164,8 +174,6 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 ```$ git push amvera master```
 
 ![Создание проекта Этап 2](assets/create_project_2.png)
-
-
 
 После загруки кода в удаленный репозиторий начнется сборка проекта, которая завершится с ошибкой. Необходимо выполнить конфигурацию проекта. Перейдите к этапу 3, нажав кнопку *"Далее"*:
 
@@ -183,12 +191,10 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 ![Уведомление по окончании создания проекта](assets/create_project_notify.png)
 
 
->***:warning:***: *[По умолчанию ASP.NET основной порт изменился с 80 по 8080](https://learn.microsoft.com/ru-ru/dotnet/core/compatibility/containers/8.0/aspnet-port)*
+> *[По умолчанию ASP.NET основной порт изменился с 80 по 8080](https://learn.microsoft.com/ru-ru/dotnet/core/compatibility/containers/8.0/aspnet-port)*
 
->***:warning:***: *Выполняйте команды git, не закрывая окно "Создание проекта", так как задание конфигурации создает коммит в удаленном репозитории, это означает, что понадобится синхронизация удаленного репозитория с имеющимся*
+> *Выполняйте команды git, не закрывая окно "Создание проекта", так как задание конфигурации создает коммит в удаленном репозитории, это означает, что понадобится синхронизация удаленного репозитория с имеющимся*
 
-
-**Внесение изменений в проект:**
 
 По завершении создания проекта, выполните команду 
 
@@ -212,7 +218,7 @@ run:
   args: --port 8080
 ```
 
-#### Создание проекта типа PostgreSQL
+#### Создание проекта типа PostgreSQL {#create_db}
 
 **Создание проекта типа PostgreSQL. Этап 1.**
 
@@ -259,9 +265,9 @@ run:
 ...
 ```
 
->***:warning:***: *[Примеры строк подключения к БД типа postgreSQL](https://www.connectionstrings.com/postgresql/)*
+> *[Примеры строк подключения к БД типа postgreSQL](https://www.connectionstrings.com/postgresql/)*
 
->***:warning:***: *Вносите изменения именно в файл appsettings.json. В проекте имеется файл appsettings.Development.json. ASP.NET Core может настраивать поведение приложения в зависимости от среды выполнения. Подробнее:[Использование нескольких сред в ASP.NET Core](https://learn.microsoft.com/ru-ru/aspnet/core/fundamentals/environments?view=aspnetcore-8.0)*
+> *Вносите изменения именно в файл appsettings.json. В проекте имеется файл appsettings.Development.json. ASP.NET Core может настраивать поведение приложения в зависимости от среды выполнения. Подробнее:[Использование нескольких сред в ASP.NET Core](https://learn.microsoft.com/ru-ru/aspnet/core/fundamentals/environments?view=aspnetcore-8.0)*
 
 Создайте коммит:
 
@@ -276,8 +282,7 @@ run:
 В разделе *Настройки* основного проекта необходимо активировать доменное имя. Имя третьего уровня генерируется автоматически
 ![Доменное имя. Активация](assets/create_domain_name.png)
 
->***:warning:***: *Посетите страницу [Сетевое взаимодействие](https://docs.amvera.ru/applications/configuration/network.html#id3) если вы хотите использовать своё доменное имя*
-
+> *Посетите страницу [Сетевое взаимодействие](https://docs.amvera.ru/applications/configuration/network.html#id3) если вы хотите использовать своё доменное имя*
 
 
 Финальный результат:
